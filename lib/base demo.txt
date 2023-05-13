@@ -1,0 +1,207 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le :  mer. 19 avr. 2023 à 13:06
+-- Version du serveur :  10.1.38-MariaDB
+-- Version de PHP :  7.3.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `demo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auditoire`
+--
+
+CREATE TABLE `auditoire` (
+  `id_audit` int(11) NOT NULL,
+  `lib_audit` varchar(255) NOT NULL,
+  `nb_etudiant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `compte`
+--
+
+CREATE TABLE `compte` (
+  `username` varchar(255) NOT NULL,
+  `password` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `enseignant`
+--
+
+CREATE TABLE `enseignant` (
+  `id_ensignant` int(11) NOT NULL,
+  `specialite` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `impression`
+--
+
+CREATE TABLE `impression` (
+  `id_imp` int(11) NOT NULL,
+  `ensignant` varchar(100) NOT NULL,
+  `matiere` varchar(100) NOT NULL,
+  `niveau` varchar(100) NOT NULL,
+  `filiere` varchar(100) NOT NULL,
+  `auditoire` varchar(100) NOT NULL,
+  `nb_etudient` int(255) NOT NULL,
+  `nb_page` int(255) NOT NULL,
+  `date` datetime NOT NULL,
+  `type_imp` varchar(100) NOT NULL,
+  `doc` varchar(100) NOT NULL,
+  `totalPage` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `impression`
+--
+
+INSERT INTO `impression` (`id_imp`, `ensignant`, `matiere`, `niveau`, `filiere`, `auditoire`, `nb_etudient`, `nb_page`, `date`, `type_imp`, `doc`, `totalPage`) VALUES
+(8, 'nihel', 'ms', '1', 'licence en gestion', 'ms', 25, 26, '2023-04-12 00:00:00', 'Recto-verso', './document/PFE-2022 (1).docx', 0),
+(9, 'nihel', 'ms', '1', 'licence en Ã©conomie', 'mrs', 369, 369, '2023-04-12 00:00:00', 'Recto-verso', './document/PFE-2022 (1).docx', 0),
+(10, 'nihel', 'miss', '2', 'MastÃ¨re de recherche', 'ms', 123, 12, '2023-04-07 00:00:00', 'Recto', './document/PFE-2022 (1).docx', 0),
+(11, 'nihel', 'ms', '1', 'MastÃ¨re de recherche', 'miss', 56, 56, '2023-04-08 00:00:00', 'Recto', './document/Sujet-du-PFE-Eya-Bouguerra (2).docx', 0),
+(12, 'nihel', 'ms', '2', 'MastÃ¨re de recherche', 'miss', 258, 258, '2023-05-03 00:00:00', 'Recto', './document/PFE-2022 (1).docx', 0),
+(13, 'nihel', 'mrs', '1', 'MastÃ¨re de recherche', 'mrs', 123, 123, '2023-04-07 00:00:00', 'Recto-verso', './document/LE PFE.pptx', 0),
+(14, 'Sayaridhahbia', 'title', '1', 'MastÃ¨re de recherche', 'ms', 25, 25, '2023-04-08 00:00:00', 'Recto', './document/LE PFE.pptx', 0),
+(15, 'Sayaridhahbia', 'mr', '1', 'MastÃ¨re de recherche', 'mr', 69, 25, '2023-04-26 00:00:00', 'Recto', './document/chapitre1.rtf', 0),
+(16, 'Sayaridhahbia', 'miss', '1', 'MastÃ¨re de recherche', 'mrs', 25, 25, '2023-04-13 00:00:00', 'Recto-verso', './document/chapitre 1.1.rtf', 0),
+(17, 'Sayaridhahbia', 'ms', '2', 'MastÃ¨re de recherche', 'mr', 456, 25, '2023-04-13 00:00:00', 'Recto-verso', './document/chapitre 1.1.rtf', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `niveau`
+--
+
+CREATE TABLE `niveau` (
+  `id_niveau` int(11) NOT NULL,
+  `lib_niveau` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `niveau`
+--
+
+INSERT INTO `niveau` (`id_niveau`, `lib_niveau`) VALUES
+(1, '1er cycle'),
+(2, '2eme cycle');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `type_imp`
+--
+
+CREATE TABLE `type_imp` (
+  `lib_type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `tele` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` tinyint(4) DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `tele`, `email`, `password`, `role`, `created_at`) VALUES
+(22, 'Sayaridhahbia', '28649911', 'sayaridahbia@gamil.com', '$2y$10$Te5OYVbjcPnRal5wTnA/JeIqazJ5ZWRMUFa/7KGhWa9e7ZR7sAkLm', 0, '2023-04-06 00:35:55'),
+(25, 'dhahbia', '28649911', 'sayaridahbia@gmail.com', '$2y$10$nUE/6abie4oUcxpXGqUdm.ZEjJiIHpZO2OhVgeH6YmV9/PZLngiDm', 0, '2023-04-08 01:42:09'),
+(26, 'mayssa', '21568749', 'may@gmail.com', '$2y$10$M1k6yFJ5.J77HFc5t2tU7OYbY5e/3Ap/pKJlvowvNo5yofbVXPo4m', 0, '2023-04-13 22:20:35');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Index pour la table `impression`
+--
+ALTER TABLE `impression`
+  ADD PRIMARY KEY (`id_imp`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `impression`
+--
+ALTER TABLE `impression`
+  MODIFY `id_imp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
